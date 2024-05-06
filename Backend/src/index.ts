@@ -1,7 +1,8 @@
 import cors from "cors";
 import "dotenv/config";
-import express, { Request, Response } from "express";
+import express from "express";
 import mongoose from "mongoose";
+import myUserRouter from "./routers/myUserRouter";
 
 // 🚀 Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URL as string)
@@ -22,9 +23,11 @@ app.use(cors());
 
 // 🚀 Define Routes
 // 🛤️ Test route: Responds with a JSON message
-app.get("/test", (req: Request, res: Response) => {
-  res.json({ message: "👋 Hello, world! 🌍" });
-});
+// app.get("/test", (req: Request, res: Response) => {
+//   res.json({ message: "👋 Hello, world! 🌍" });
+// });
+
+app.use("api/my/user", myUserRouter);
 
 // 🚀 Start the server
 const PORT = process.env.PORT || 7000; // Use environment variable for port or default to 7000
